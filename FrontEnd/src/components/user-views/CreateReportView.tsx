@@ -256,14 +256,7 @@ export const CreateReportView: React.FC = () => {
     }, 5000);
   };
 
-  // Click on visual coordinate picker
-  const handleMapSelection = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - rect.left) / rect.width) * 100;
-    const y = ((e.clientY - rect.top) / rect.height) * 100;
-    setMapX(Math.round(x));
-    setMapY(Math.round(y));
-  };
+
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -541,16 +534,15 @@ export const CreateReportView: React.FC = () => {
               </span>
             </div>
             <p className="text-[10px] text-brand-secondary leading-relaxed block px-1">
-              Haz clic sobre la siguiente cuadrícula o amplía el mapa para definir de forma precisa el punto donde avistaste o perdiste a la mascota. Esto colocará un pin animado en el mapa.
+              El marcador se posicionará automáticamente en el mapa basándose en la dirección que escribas y selecciones arriba.
             </p>
 
             <div 
               className="relative aspect-[21/9] w-full rounded-2xl border border-[#E9E1D4] overflow-hidden group shadow-inner"
             >
-              {/* Map clickable area */}
+              {/* Map visual area (read-only) */}
               <div 
-                onClick={handleMapSelection}
-                className="absolute inset-0 bg-cover bg-center cursor-crosshair"
+                className="absolute inset-0 bg-cover bg-center cursor-default"
                 style={{ backgroundImage: `url(${chileMap})` }}
               />
 
@@ -623,7 +615,7 @@ export const CreateReportView: React.FC = () => {
                   Ajustar Ubicación en Mapa Satelital
                 </h3>
                 <p className="text-[10px] text-brand-secondary">
-                  Haz clic en el mapa para ubicar de forma precisa el punto de avistamiento.
+                  Vista ampliada del punto de avistamiento según la dirección seleccionada.
                 </p>
               </div>
               <button 
@@ -635,10 +627,9 @@ export const CreateReportView: React.FC = () => {
               </button>
             </div>
 
-            {/* Large Map Container */}
+            {/* Large Map Container (read-only) */}
             <div 
-              onClick={handleMapSelection}
-              className="relative w-full h-[60vh] rounded-2xl bg-cover bg-center border border-[#E9E1D4] overflow-hidden cursor-crosshair shadow-inner"
+              className="relative w-full h-[60vh] rounded-2xl bg-cover bg-center border border-[#E9E1D4] overflow-hidden cursor-default shadow-inner"
               style={{ backgroundImage: `url(${chileMap})` }}
             >
               {/* Grid Overlay */}
